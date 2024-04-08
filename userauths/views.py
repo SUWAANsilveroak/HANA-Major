@@ -4,8 +4,9 @@ from django.contrib import messages
 from userauths.forms import UserRegisterForm
 from django.contrib.auth.models import User
 from django.conf import settings
+from userauths.models import User
 
-User = settings.AUTH_USER_MODEL
+#User = settings.AUTH_USER_MODEL
 
 
 def register_view(request):
@@ -47,19 +48,24 @@ def login_view(request):
         
         try:
             user = User.objects.get(email=email)
-        except User.DoesNotExist:
-            messages.error(request, "User does not exist")
-            return redirect("userauths:sign-in") # Redirect back to the sign-in page if user does not exist
+            user = authenticate(request, email=email, password=password)
+            
+            if user is not None:
+                login(request, user)
+                messages.success(request, "You are logged in.")
+                return redirect("core:index")  # Redirect to the home page after successful login
+            else:
+                messages.warning(request, "User does not exist, Create an account.")  # Display error message if username or password is incorrect
+                
+            
+        except:
+            messages.warning(request, f"User with {email} does not exist")
+            
         
-        user = authenticate(request, email=email, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect("core:index")  # Redirect to the home page after successful login
-        else:
-            messages.error(request, "Username or password is incorrect")
+        
     
-    context = {}
-    return render(request, "userauths/sign-in.html", context)
+    #context = {}
+    return render(request, "userauths/sign-in.html")
 
 def logout_view(request): 
     logout(request)
