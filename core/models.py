@@ -1,3 +1,5 @@
+# This Python file defines models for our e-commerce platform including
+# categories, products, cart orders, product reviews, wishlists, and addresses.
 
 from django.db import models
 from shortuuid.django_fields import ShortUUIDField 
@@ -42,7 +44,7 @@ class Category(models.Model):
     def category_image(self):
         return mark_safe('<img src="%s" width="50" height="50"/>' % (self.image.url))
     
-    def _str_(self):
+    def __str__(self):
         return self.title
     
 class Tags(models.Model):
@@ -65,7 +67,7 @@ class Product(models.Model):
     old_price = models.DecimalField(max_digits=999999999999, decimal_places=2, default="2.99")
     
     specifications = models.TextField(null=True, blank=True)
-    tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
+    #tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
     
     product_status = models.CharField(choices=STATUS, max_length=10, default="in_review")
     
@@ -82,10 +84,10 @@ class Product(models.Model):
     class Meta:
         verbose_name_plural = "Products"
         
-    def product_image(self):
+    def product_image(self): #img asset is not there thats why its not working 
         return mark_safe('<img src="%s" width="50" height="50"/>' % (self.image.url))
     
-    def _str_(self):
+    def __str__(self):
         return self.title
     
     def get_percentage(self):
@@ -93,17 +95,17 @@ class Product(models.Model):
         return new_price
 
 class ProductImages(models.Model):
-    images = models.ImageField(upload_to="product-images", default="product.jpg")
+    image = models.ImageField(upload_to="product-images", default="product.jpg")
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     date =models.DateTimeField(auto_now_add=True)
     
     class Meta:
         verbose_name_plural = "Product Images"
 
-################################################cart order item#####################################################
-################################################cart order item#####################################################
-################################################cart order item#####################################################
-################################################cart order item#####################################################
+###################################### cart order item #####################################################
+###################################### cart order item #####################################################
+###################################### cart order item #####################################################
+###################################### cart order item #####################################################
         
 class CartOrder(models.Model):
     user = models,models.ForeignKey(User, on_delete=models.CASCADE)
@@ -117,6 +119,7 @@ class CartOrder(models.Model):
 
 class CartOrderItem(models.Model):
     order = models.ForeignKey(CartOrder, on_delete=models.CASCADE)
+    invoice_no = models.CharField(max_length=200)
     product_status = models.CharField(max_length=200)
     item = models.CharField(max_length=200)
     image = models.CharField(max_length=200)
@@ -131,10 +134,10 @@ class CartOrderItem(models.Model):
         return mark_safe('<img src="/media/%s" width="50" height="50"/>' % (self.image))
     
 
-################################################ Product Review, wishlist, Address #####################################################
-################################################ Product Review, wishlist, Address #####################################################
-################################################ Product Review, wishlist, Address #####################################################
-################################################ Product Review, wishlist, Address #####################################################
+################################ Product Review, wishlist, Address #####################################################
+################################ Product Review, wishlist, Address #####################################################
+################################ Product Review, wishlist, Address #####################################################
+################################ Product Review, wishlist, Address #####################################################
 
 class ProductReview(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
@@ -146,7 +149,7 @@ class ProductReview(models.Model):
     class Meta:
         verbose_name_plural = "Product Reviews"
     
-    def _str_(self):
+    def __str__(self):
         return self.product.title
     
     def get_rating(self):
@@ -160,7 +163,7 @@ class WishList(models.Model):
     class Meta:
         verbose_name_plural = "Wish List"
     
-    def _str_(self):
+    def __str__(self):
         return self.product.title
     
     def get_rating(self):
@@ -174,5 +177,3 @@ class Address(models.Model):
     class Meta:
         verbose_name_plural = "Address"
 
-    
-    
