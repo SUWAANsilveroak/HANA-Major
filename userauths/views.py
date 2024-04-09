@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from userauths.forms import UserRegisterForm
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from django.conf import settings
 from userauths.models import User
 
@@ -62,15 +62,11 @@ def login_view(request):
         except:
             messages.warning(request, f"User with {email} does not exist")
             
-        
-        
-    
-    #context = {}
+     #context = {}
     return render(request, "userauths/sign-in.html")
 
 def logout_view(request): 
     logout(request)
     messages.success(request,"logged-out succesfully")
-
     return redirect("userauths:sign-in")
     

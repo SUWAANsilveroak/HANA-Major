@@ -492,6 +492,13 @@ ol {
 	text-align: center;
 	border-radius: 50%;
 }
+.header.sticky-top {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
 
 .offcanvas-menu-wrapper {
 	display: none;
