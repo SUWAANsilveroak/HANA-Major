@@ -84,7 +84,7 @@ class Product(models.Model):
     class Meta:
         verbose_name_plural = "Products"
         
-    def product_image(self): #img asset is not there thats why its not working 
+    def product_image(self): #facing some issue here 
         return mark_safe('<img src="%s" width="50" height="50"/>' % (self.image.url))
     
     def __str__(self):
@@ -95,12 +95,13 @@ class Product(models.Model):
         return new_price
 
 class ProductImages(models.Model):
-    image = models.ImageField(upload_to="product-images", default="product.jpg")
+    image = models.ImageField(upload_to="product-images", default="product.jpg") 
     product = models.ForeignKey(Product, related_name="p_images", on_delete=models.SET_NULL, null=True)
     date =models.DateTimeField(auto_now_add=True)
     
     class Meta:
         verbose_name_plural = "Product Images"
+
 
 ###################################### cart order item #####################################################
 ###################################### cart order item #####################################################
@@ -108,7 +109,7 @@ class ProductImages(models.Model):
 ###################################### cart order item #####################################################
         
 class CartOrder(models.Model):
-    user = models,models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=999999999999, decimal_places=2, default="1.99")
     paid_status = models.BooleanField(default=False)
     order_date = models.DateTimeField(auto_now_add=True)

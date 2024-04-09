@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 from core.models import Category, Product, ProductImages, CartOrder, CartOrderItem, ProductReview,WishList,Address,Vendor
 # Register your models here.
 
@@ -7,7 +8,12 @@ class ProductImagesAdmin(admin.TabularInline):
 
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImagesAdmin]
-    list_display = ['user', 'title','product_image', 'price','category', 'featured', 'product_status','pid']
+    list_display = ['user', 'title', 'product_image', 'price', 'category', 'featured', 'product_status', 'pid']
+
+    def product_image(self, obj):
+        if obj.image:
+            return mark_safe('<img src="{}" width="50" height="50" />'.format(obj.image.url))
+        return "No Image"
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['title', 'category_image']
