@@ -57,7 +57,7 @@ class Product(models.Model):
     pid = ShortUUIDField(unique=True, length=10, max_length=30, prefix="prd", alphabet="abcdefgh12345")
     
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="category")
     
     title =models.CharField(max_length=100, default="Fresh")
     image = models.ImageField(upload_to="Category", default="product.jpg")
@@ -96,7 +96,7 @@ class Product(models.Model):
 
 class ProductImages(models.Model):
     image = models.ImageField(upload_to="product-images", default="product.jpg")
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, related_name="p_images", on_delete=models.SET_NULL, null=True)
     date =models.DateTimeField(auto_now_add=True)
     
     class Meta:
