@@ -6,7 +6,7 @@ from core.models import Category, Product, ProductImages, CartOrder, CartOrderIt
 
 # Create your views here.
 def index(request):
-    products = Product.objects.filter(product_status="published", featured=True)
+    products = Product.objects.filter(product_status="published", featured=True).order_by("-id")
     context = {
         "products":products
     }
@@ -14,7 +14,7 @@ def index(request):
     return render(request, 'core/index.html',context)
 
 def category_list_view(request):
-    categories = Category.objects.all().annotate(product_count=Count("product"))
+    categories = Category.objects.all()#.annotate(product_count=Count("product"))
     
     context = {
         "categories":categories

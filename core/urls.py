@@ -14,11 +14,3 @@ urlpatterns = [
     path("category/<cid>/", category_product_list_view, name="category-product-list"),
     ]
 
-    
-    
-    
-    
-    #Category
-    
-    
-

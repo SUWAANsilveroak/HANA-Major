@@ -323,7 +323,7 @@ ol {
 }
 
 .header__logo {
-	padding: 26px 0;
+	padding: 15px 0;
 }
 
 .header__logo a {
@@ -513,70 +513,72 @@ ol {
 -----------------------*/
 
 .banner {
-	height: 500px;
+    height: 500px;
 }
 
 .banner__text span {
-	font-size: 18px;
-	color: #ca1515;
-	text-transform: uppercase;
+    font-size: 18px;
+    color: #ca1515;
+    text-transform: uppercase;
 }
 
 .banner__text h1 {
-	font-size: 80px;
-	color: #111111;
-	font-family: "Cookie", cursive;
-	margin-bottom: 15px;
+    font-size: 80px;
+    color: #111111;
+    font-family: "Cookie", cursive;
+    margin-bottom: 15px;
 }
 
 .banner__text a {
-	font-size: 14px;
-	color: #111111;
-	text-transform: uppercase;
-	font-weight: 700;
-	position: relative;
-	padding: 0 0 3px;
-	display: inline-block;
+    font-size: 14px;
+    color: #111111;
+    text-transform: uppercase;
+    font-weight: 700;
+    position: relative;
+    padding: 0 0 3px;
+    display: inline-block;
 }
 
 .banner__text a:after {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	height: 2px;
-	width: 100%;
-	background: #ca1515;
-	content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: #ca1515;
+    content: "";
 }
 
 .banner__slider {
-	text-align: center;
-	padding: 150px 0 0;
+    text-align: center;
+    padding: 150px 0 0;
 }
 
 .banner__slider.owl-carousel .owl-dots {
-	position: absolute;
-	left: 0;
-	top: 430px;
-	width: 100%;
-	text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0; /* Adjusted to cover the full width */
+    top: 430px;
+    text-align: center;
+    z-index: 1; /* Ensure the dots are above the banner text */
 }
 
 .banner__slider.owl-carousel .owl-dots button {
-	height: 12px;
-	width: 12px;
-	background: #a1a1a1;
-	border-radius: 50%;
-	margin-right: 10px;
+    height: 12px;
+    width: 12px;
+    background: #a1a1a1;
+    border-radius: 50%;
+    margin-right: 10px;
 }
 
 .banner__slider.owl-carousel .owl-dots button.active {
-	background: #ca1515;
+    background: #ca1515;
 }
 
 .banner__slider.owl-carousel .owl-dots button:last-child {
-	margin-right: 0;
+    margin-right: 0;
 }
+
 
 /*---------------------
   Trend
@@ -1800,7 +1802,7 @@ ol {
 	text-transform: uppercase;
 	padding: 14px 30px 15px;
 	border-radius: 50px;
-	float: left;
+	/*float: left;*/
 	margin-right: 10px;
 	margin-bottom: 10px;
 }
@@ -1855,7 +1857,7 @@ ol {
 	font-weight: 600;
 	color: #111111;
 	width: 150px;
-	float: left;
+	/*float: left;*/
 }
 
 .product__details__widget ul li .stock__checkbox {
