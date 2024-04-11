@@ -20,6 +20,7 @@ STATUS = (
     ("disabled","Disabled"),
     ("in_review","In Review"),
     ("published","Published"),
+    ("in_stock","In Stock"),
 )
 
 RATING = (
@@ -53,6 +54,12 @@ class Tags(models.Model):
 class Vendor(models.Model):
     pass
 
+class Color(models.Model):
+   pass
+    
+class Size(models.Model):
+   pass
+
 class Product(models.Model):
     pid = ShortUUIDField(unique=True, length=10, max_length=30, prefix="prd", alphabet="abcdefgh12345")
     
@@ -69,7 +76,11 @@ class Product(models.Model):
     specifications = models.TextField(null=True, blank=True)
     #tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
     
+    #Colors = models.ManyToManyField(Color)#testing phase
+    #Sizes = models.ManyToManyField(Size)
+    
     product_status = models.CharField(choices=STATUS, max_length=10, default="in_review")
+    
     
     status = models.BooleanField(default=True)
     in_stock = models.BooleanField(default=True)

@@ -41,11 +41,12 @@
         <div class="offcanvas__close">+</div>
         <ul class="offcanvas__widget">
             <li><span class="icon_search search-switch"></span></li>
-            <li><a href="#"><span class="icon_heart_alt"></span>
-                <div class="tip">2</div>
+            <li><a href=""><span class="icon_heart_alt"></span>
+                <div class="tip ">2</div>
             </a></li>
             <li><a href="#"><span class="icon_bag_alt"></span>
-                <div class="tip">2</div>
+                <!--bag count JS functionality here-->
+                <div class="tip cart-items-count"> {{ request.session.cart_data_obj|length}}</div>
             </a></li>
         </ul>
         <div class="offcanvas__logo">
@@ -53,8 +54,10 @@
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__auth">
-            <a href="#">Login</a>
-            <a href="#">Register</a>
+            <a href="{% url 'userauths:sign-in' %}">Login</a>
+            <a href="{% url 'userauths:sign-up' %}">Register</a>
+            <a href="{% url 'userauths:sign-out' %}">Sign Out</a>
+
         </div>
     </div>
     <!-- Offcanvas Menu End -->
@@ -65,25 +68,20 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-2">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="{% static 'img/HANA_LOGO.png' %}" alt="" width="100" height="50"></a>
+                        <a href="{% url 'core:index'%}"><img src="{% static 'img/HANA_LOGO.png' %}" alt="" width="100" height="50"></a>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="#">Women’s</a></li>
-                            <li><a href="#">Men’s</a></li>
-                            <li><a href="./shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            <li class="active"><a href="{% url 'core:index'%}">Home</a></li>
+                            <li><a href="{% url 'core:category-list' %}">Category</a>
                                 <ul class="dropdown">
-                                    <li><a href="./product-details.html">Product Details</a></li>
-                                    <li><a href="./shop-cart.html">Shop Cart</a></li>
-                                    <li><a href="./checkout.html">Checkout</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                    {% for c in categories %}
+                                    <li><a href="{% url 'core:category-product-list' c.cid %}">{{c.title}}</a></li>
+                                    {% endfor %}
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">Blog</a></li>
                             <li><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
@@ -102,7 +100,7 @@
                                 <div class="tip">2</div>
                             </a></li>
                             <li><a href="#"><span class="icon_bag_alt"></span>
-                                <div class="tip">2</div>
+                                <div class="tip cart-items-count">{{ request.session.cart_data_obj|length}}</div>
                             </a></li>
                             {% endif %}
                         </ul>
@@ -126,7 +124,7 @@
         <script>
             setTimeout (() =>{
                 $(".alert").alert("close")
-            },5000)
+            },2000)
         </script>
     </header>
     <!-- Header Section End -->
@@ -145,7 +143,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-7">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="./index.html"><img src="{% static 'img/HANA_LOGO.png' %}" alt="" width="100" height="50"></a>
+                            <a href="{% url 'core:index'%}"><img src="{% static 'img/HANA_LOGO.png' %}" alt="" width="100" height="50"></a>
                         </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                         cilisis.</p>
@@ -214,8 +212,11 @@
     <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
             <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
+            <form class="search-model-form" action="{% url 'core:search' %}" method="GET">
+
+                <!--Search bar is here-->
+                <input type="text" id="search-input" placeholder="Search here....." name="q">
+                <button type="submit" id="search-button" class="btn btn-primary">Search</button>
             </form>
         </div>
     </div>
@@ -232,6 +233,9 @@
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'js/jquery.nicescroll.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    <!-- Include the JavaScript file -->
+    <script src="{% static 'js/addToCart.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </body>
     
     </html>

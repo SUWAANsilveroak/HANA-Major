@@ -232,4 +232,39 @@ Created: Colorib
         $(this).addClass('active');
     });
 
+    $("#addToCartBtn").on("click", function(){
+        let quantity = $("#product-quantity").val()
+        let product_title = $(".product-title").val()
+        let product_id = $(".product-id").val()
+        let product_price = $("#product-price").val()
+        let this_val = $(this)
+
+        console.log("Quantity:", quantity);
+        console.log("Title:", product_title);
+        console.log("Price:", product_price );
+        console.log("ID:", product_id);
+        console.log("Current Element:", this_val);
+
+        $.ajax({
+            url: '/add-to-cart',
+            data:{
+                'id': product_id,
+                'qty': quantity,
+                'title': product_title,
+                'price': product_price,
+            },
+            dataType: 'json',
+            beforeSend: function(){
+                console.log("Adding product to cart.....");
+            },
+            success: function(res){
+                this_val.html("Item added to cart")
+                console.log("product added to cart"); 
+                $(".cart-items-count").text(response.total)    
+            },
+
+
+        })
+    });
+
 })(jQuery);

@@ -91,11 +91,10 @@
                         <ul class="product__hover">
                             <li><a href="{{ p.image.url }}" class="image-popup"><span class="arrow_expand"></span></a></li>
                             <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
+                            <li><a href="{% url 'core:product-detail' p.pid %}"><span class="icon_bag_alt"></span></a></li>                        </ul>
                     </div>
                     <div class="product__item__text">
-                        <h6><a href="#">{{ p.title }}</a></h6>
+                        <h6><a href="{% url 'core:product-detail' p.pid %}">{{ p.title }}</a></h6>
                         <div class="rating">
                             {% for _ in p.rating %}
                             <i class="fa fa-star"></i>
@@ -438,7 +437,7 @@
             </div>
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
                 <div class="instagram__item set-bg" data-setbg="{% static 'img/instagram/insta-5.jpg' %}">
-                  <div class="instagram__text">' %}"
+                  <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
                         <a href="#">@ ashion_shop</a>
                     </div>

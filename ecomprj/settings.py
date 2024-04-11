@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     
+    #Third party app
+    'taggit', # will need in future
+    
     #custome apps
     'core',
     'userauths',
