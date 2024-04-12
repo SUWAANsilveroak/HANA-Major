@@ -7,6 +7,11 @@ from django.http import JsonResponse
 from django.shortcuts import redirect
 from core.models import Category, Product, ProductImages, CartOrder, CartOrderItem, ProductReview,WishList,Address
 
+from django.urls import reverse
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from paypal.standard.forms import PayPalPaymentsForm
+
 # Create your views here.
 def index(request):
     products = Product.objects.filter(product_status="published", featured=True).order_by("-id")
@@ -103,6 +108,25 @@ def cart_view(request):
     else:
         messages.warning(request,"Looks like your cart is empty!")
         return redirect("core:index")
+
+def checkout_view(request):
+    host = request.get_host()
+    paypal_dict = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount':'200',
+        'item_name': "order-item-no-3",
+        'invoice':"INVOICE_NO_3",
+        'currency_code':'RS',
+        'notify_url':'http://{}{}'.format(host, reverse("core:paypal-ipn")),
+        #'return_url':''
+    }
+
+def payment_completed_view (request):
+    return render(request,"core/payment-completed.html")
+
+def payment_failed_view (request):
+    return render(request,"core/payment-failed.html")
+
        
     
     

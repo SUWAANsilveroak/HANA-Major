@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     
     #Third party app
     'taggit', # will need in future
+    'paypal.standard.ipn',
     
     #custome apps
     'core',
@@ -149,3 +150,6 @@ JAZZMIN_SETTINGS = {
 }
 
 AUTH_USER_MODEL = 'userauths.user'
+
+PAYPAL_RECEIVER_EMAIL = 'sb-c5xgx6555500@business.example.com'
+PAYPAL_TEST = True

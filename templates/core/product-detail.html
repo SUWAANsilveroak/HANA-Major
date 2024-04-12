@@ -72,11 +72,11 @@
                                 <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                 <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
                                 <button type="submit" class="cart-btn" data-index="{{product.id}}" id="addToCartBtn"><span class="icon_bag_alt"></span> Add to cart</button>
-                                <input type="text" value="{{ product.price }}" class="product-price-{{product.id}}" id="product-price" name="product_price">
-                                <input type="text" value="{{ product.id }}" class="product-id-{{product.id}}" name="product_id">
-                                <input type="text" value="{{ product.title }}" class="product-title-{{product.id}}" name="product_title">
-                                <input type="text" value="{{ product.image.url }}" class="product-image-{{product.id}}" name="product_image">
-                                <input type="text" value="{{ product.pid }}" class="product-pid-{{product.id}}" name="product_pid">
+                                <input type="hidden" value="{{ product.price }}" class="product-price-{{product.id}}" id="product-price" name="product_price">
+                                <input type="hidden" value="{{ product.id }}" class="product-id-{{product.id}}" name="product_id">
+                                <input type="hidden" value="{{ product.title }}" class="product-title-{{product.id}}" name="product_title">
+                                <input type="hidden" value="{{ product.image.url }}" class="product-image-{{product.id}}" name="product_image">
+                                <input type="hidden" value="{{ product.pid }}" class="product-pid-{{product.id}}" name="product_pid">
                             </ul>
                         </div>
                         
