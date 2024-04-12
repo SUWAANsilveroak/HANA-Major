@@ -3,6 +3,7 @@
 {% load static %}
 
     <!-- Categories Section Begin -->
+    <div class="container" style="margin: 80px;"></div>
     <section class="categories">
         <div class="container-fluid">
             <div class="row">
@@ -91,7 +92,11 @@
                         <ul class="product__hover">
                             <li><a href="{{ p.image.url }}" class="image-popup"><span class="arrow_expand"></span></a></li>
                             <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="{% url 'core:product-detail' p.pid %}"><span class="icon_bag_alt"></span></a></li>                        </ul>
+                            
+                            <!--fecthing detals from cart button like img price etc-->
+                            <li><a href="{% url 'core:product-detail' p.pid %}"><span class="icon_bag_alt"></span></a></li>
+                            
+                        </ul>    
                     </div>
                     <div class="product__item__text">
                         <h6><a href="{% url 'core:product-detail' p.pid %}">{{ p.title }}</a></h6>
@@ -100,7 +105,7 @@
                             <i class="fa fa-star"></i>
                             {% endfor %}
                         </div>
-                        <div class="product__price">₹ {{ p.price }}</div>
+                        <div class="product-price-{{p.id}}" id="">₹ {{ p.price }}</div>
                         <div class="old-product__price"><del>₹ {{ p.old_price }}</del></div>
 
                     </div>

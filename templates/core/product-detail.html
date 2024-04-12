@@ -25,11 +25,11 @@
                 <div class="col-lg-6">
                     <div class="product__details__pic"><!--Need to fix issue here-->
                         <div class="product__details__pic__left product__thumb nice-scroll">
-                            <a class="pt active" href="#product-1">
+                            <a class="image-popup" href="#">
                                 <img src="{{product.image.url}}" alt="">
                             </a>
                             {%for p in product_image%}
-                            <a class="pt" href="#product-2">
+                            <a class="pt" href="#">
                                 <img src="{{product.image.url}}" alt="">
                             </a>
                             {%endfor%}
@@ -57,27 +57,29 @@
                             <i class="fa fa-star"></i>
                             <span>( 138 reviews )</span>
                         </div>
-                        <input type="hidden" value="{{ product.price }}" class="" name="" id="product-price">
                         <div class="product__details__price">Rs {{product.price}} <span>Rs {{product.old_price}}</span></div>
                         <p> {{product.description | truncatechars:100}} </p>
-
+                        
                         <!--cart button-->
                         <div class="product__details__button">
                             <div class="quantity">
-                                
                                 <span>Quantity:</span>
                                 <div class="pro-qty">
-                                <input type="number" id="product-quantity" value="1" min="1" max="999" step="1">
+                                    <input type="number" id="product-quantity" class="product-quantity-{{product.id}}"  value="1" min="1" max="999" step="1">
                                 </div>
                             </div>
-                            <input type="hidden" value="{{ product.id }}" class="product-id" name="product_id" id="">
-                            <input type="hidden" value="{{ product.title }}" class="product-title" name="product_title" id="">
-                            <a href="#" class="cart-btn" id="addToCartBtn"><span class="icon_bag_alt"></span> Add to cart</a>
                             <ul>
                                 <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                 <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
+                                <button type="submit" class="cart-btn" data-index="{{product.id}}" id="addToCartBtn"><span class="icon_bag_alt"></span> Add to cart</button>
+                                <input type="text" value="{{ product.price }}" class="product-price-{{product.id}}" id="product-price" name="product_price">
+                                <input type="text" value="{{ product.id }}" class="product-id-{{product.id}}" name="product_id">
+                                <input type="text" value="{{ product.title }}" class="product-title-{{product.id}}" name="product_title">
+                                <input type="text" value="{{ product.image.url }}" class="product-image-{{product.id}}" name="product_image">
+                                <input type="text" value="{{ product.pid }}" class="product-pid-{{product.id}}" name="product_pid">
                             </ul>
                         </div>
+                        
                         <!--cart button ends here-->
 
                         <div class="product__details__widget">
